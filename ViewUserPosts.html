@@ -1,0 +1,28 @@
+<html>
+<?php
+$mysqli = new mysqli("mysql.eecs.ku.edu", "o931f463", "naiWee4a", "o931f463");
+?>
+<body>
+  <h1>Hey there Admin! Click the dropdown menu below to select what user's post you would like to view</h1>
+  <form action="ViewUserPosts.php" method = "post">
+    <label for="users">Select a user:</label><br>
+    <select name="users">
+    <option value="">User</option>
+          <?php
+            $result= $mysqli->query("SELECT user_id FROM Users");
+            if($result->num_rows > 0)
+            {
+              while ($row = $result->fetch_assoc())
+              {
+            ?>
+           <option value= "<?php echo $row['user_id']; ?>" > <?php echo $row['user_id'];?> </option>
+           <?php
+              }
+            }
+          ?>
+    </select>
+  <br>
+  <input type="submit" value="Submit"></input>
+</form>
+</body>
+</html>
